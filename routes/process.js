@@ -1,10 +1,11 @@
 var express = require('express');
+var utils=require('./../js/common/utils');
 var router = express.Router();
 
 /* GET users listing. */
 router.post('/', function(request, response, next) {
     var input = request.body;
-    console.log(input);
+    console.log('request=%s', JSON.stringify(input));
 
     if(!isRequestValidated(request)) {
         response.status(400).send({"error": "Could not decode request: JSON parsing failed"});
@@ -26,14 +27,17 @@ router.post('/', function(request, response, next) {
             var targetItem={};
 
             if(!item.hasOwnProperty('image')){
+                console.warn('payload element does hot have property image');
                 continue;
             }
 
             if(!item.hasOwnProperty('slug')){
+                console.warn('payload element does hot have property slug');
                 continue;
             }
 
             if(!item.hasOwnProperty('title')){
+                console.warn('payload element does hot have property title');
                 continue;
             }
 
@@ -52,7 +56,9 @@ router.post('/', function(request, response, next) {
 
     }
 
-    response.send(JSON.stringify(result));
+    var body=JSON.stringify(result);
+    console.log('response=%s', body);
+    response.send(body);
 
     function isRequestValidated(req){
         var input = request.body;
@@ -61,7 +67,7 @@ router.post('/', function(request, response, next) {
             return false;
         }
 
-        if(!isArray(input['payload'])){
+        if(!utils.isArray(input['payload'])){
             console.log('Payload is not an array!');
             return false;
         }
@@ -70,24 +76,17 @@ router.post('/', function(request, response, next) {
             var item=input['payload'][i];
 
             if (!item.hasOwnProperty('drm')) {
-                continue;
+                console.warn('payload element does hot have property drm');
+                //continue;
             }
             if (!item.hasOwnProperty('episodeCount')) {
-                continue;
+                console.warn('payload element does hot have property episodeCount');
+                //continue;
             }
-
-            if(item['drm']!==true || item['episodeCount']<=0){
-                continue;
-            }
-
-
         }
         return true;
     }
 
-    function isArray(item){
-        return Object.prototype.toString.call( item ) === '[object Array]';
-    }
 });
 
 module.exports = router;
