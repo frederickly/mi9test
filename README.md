@@ -18,7 +18,7 @@ Internet access
 
 ## How to build run
 1: under project folder, run npm install
-2: under project folder, run node app.test.js
+2: under project folder, run node app.js
 
 ## How to test
 use any restful client to test or verify
