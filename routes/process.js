@@ -12,6 +12,8 @@ router.post('/', function(request, response, next) {
     if(!isRequestValidated(request)) {
         var errorMsg={};
         errorMsg['error']="Could not decode request: JSON parsing failed";
+        var body=JSON.stringify(errorMsg);
+        console.log('response=%s', body);
         response.status(400).json(errorMsg);
     }
 
