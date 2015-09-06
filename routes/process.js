@@ -9,7 +9,7 @@ router.post('/', function(request, response, next) {
     var input = request.body;
     console.log('request=%s', JSON.stringify(input));
 
-    if(!isRequestValidated(request)) {
+    if(!isRequestValidated()) {
         var errorMsg={};
         errorMsg['error']="Could not decode request: JSON parsing failed";
         var body=JSON.stringify(errorMsg);
@@ -67,7 +67,7 @@ router.post('/', function(request, response, next) {
     console.log('response=%s', body);
     response.json(result);
 
-    function isRequestValidated(req){
+    function isRequestValidated(){
         var input = request.body;
         if(!input.hasOwnProperty(fieldNames.PAYLOAD)) {
             console.warn('Can not find payload!');
