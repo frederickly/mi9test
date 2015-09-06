@@ -1,5 +1,3 @@
-## The project is only for skill assessment purpose regarding Frederick Wang's job application for the role in MI9.
-
 ## Quick demo with Nodejs
 This example demonstrates how **Nodejs, express ** work together
 
