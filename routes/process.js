@@ -61,7 +61,7 @@ router.post('/', function(request, response, next) {
 
     var body=JSON.stringify(result);
     console.log('response=%s', body);
-    response.send(body);
+    response.json(result);
 
     function isRequestValidated(req){
         var input = request.body;
