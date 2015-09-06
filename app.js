@@ -6,11 +6,12 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-
-var routes = require('./routes/index');
 var processor = require('./routes/process');
 
 var app = express();
+
+
+app.set('port', process.env.PORT || 3000);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -24,8 +25,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
-app.use('/process', processor);
+app.use('/', processor);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -61,6 +61,6 @@ app.use(function(err, req, res, next) {
 
 module.exports = app;
 
-app.listen(process.env.PORT || 3000, function(){
-  console.log("Listening on port 3000...");
+app.listen(app.get('port'), function(){
+  console.log("Listening on port %s...", app.get('port'));
 });
