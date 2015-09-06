@@ -10,7 +10,9 @@ router.post('/', function(request, response, next) {
     console.log('request=%s', JSON.stringify(input));
 
     if(!isRequestValidated(request)) {
-        response.status(400).send({"error": "Could not decode request: JSON parsing failed"});
+        var errorMsg={};
+        errorMsg['error']="Could not decode request: JSON parsing failed";
+        response.status(400).json(errorMsg);
     }
 
     var result={'response':[]};
