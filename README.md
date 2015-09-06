@@ -10,10 +10,12 @@ the port number is 3000 when run it locally.
 use promise to reduce the callback pain
 use log framework such as Node-Loggly, Bunyan or Winston to handle logging
 more test cases
+organize the package and folder in a better way
+remove view jade, since it is not relevant for this test project
 
 ## Prerequisites for package and run:
 nodejs
-Internet access for maven central repository
+Internet access
 
 
 ## How to build run
